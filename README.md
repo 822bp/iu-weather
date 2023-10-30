@@ -8,6 +8,6 @@ Use `yarn start` to start the weather app.
 ### Setting the API Key:
 Create a file called `.env.local` and add this line:
 ```
-OW_API_KEY = [REPLACE THIS WITH THE API KEY]
+OW_API_KEY = "[REPLACE THIS WITH THE API KEY]"
 ```
 Don't forget to replace the placeholder with the Api key.
