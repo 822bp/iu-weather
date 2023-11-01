@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 
-const w_data_string = `test data
-`;
-const w_data = JSON.parse(w_data_string);
-
 function Location(pos) {
   return (
     <>
@@ -15,6 +11,31 @@ function Location(pos) {
         <span>{(pos.name || "Getting Location...")}</span>
       </div>
     </>
+  )
+}
+
+function SunStatus({data: weather}) {
+  const sunPercent = () => parseInt((weather.dt - weather.sys.sunrise) / (weather.sys.sunset - weather.sys.sunrise) * 100)
+  const getSunsetColor = () => (sunPercent() > 0) ? ("yellow") : ("darkblue");
+  return (
+    <div className='section' style={{backgroundColor: weather && getSunsetColor()}}>
+      <div className='sunset-text'>{weather && sunPercent() > 0 ? (sunPercent() + "% until dawn") : (sunPercent()*-1 + "% until sunrise")}</div>
+    </div>
+  )
+}
+
+function Wind({data: weather}) {
+  const c_style = {
+    transform: weather ? "rotate("+ weather.wind.deg + "deg)": 'rotate(0deg)', 
+    transition: 'transform 250ms ease',
+  }
+  return (
+    <div className='box-section'>
+      <div className='text_tp_1' style={{marginTop: "2vh"}}>Wind: {!weather ? (<img src={require("./assets/loading.gif")} alt="Loading..." className='weather-icon'></img>) :
+      (weather.wind.speed + " knots @" + weather.wind.deg + "°")
+      }</div>
+      <img src={require("./assets/compass.png")} alt="Loading..." className='compass' style={c_style}></img>
+    </div>
   )
 }
 
@@ -30,9 +51,8 @@ const Weather = () => {
       setPos(position_);
     }
     getLocation();
-    setData(w_data);
   }, []);
-  /*
+
   useEffect(() => {
     async function getData(){
       return await fetch("https://api.openweathermap.org/data/2.5/weather?lat="+position.coords.latitude+"&lon="+position.coords.longitude+"&appid="+process.env.REACT_APP_OW_API_KEY)
@@ -45,19 +65,21 @@ const Weather = () => {
       console.error(e);
     }
     }, [position]);
-  */
+
  console.log(data);
   return (
     <div>
       <div className='header' style={{marginTop: "5vh"}}>
         {Location(data)}
         <div className='temperature'>
-          {data ? (parseInt(data.main.temp)-275 + "°") : "..."}
+          {data ? (parseInt(data.main.temp)-273 + "°") : "..."}
         </div>
         <div className='text_tp_1' style={{marginTop: "3vh"}}>
           {data ? data.weather[0].description : "Getting data..."}
         </div>
       </div>
+      <SunStatus data={data}/>
+      <Wind data={data}/>
     </div>
   )
 };
