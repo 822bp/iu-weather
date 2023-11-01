@@ -1,6 +1,8 @@
 # iu-weather
 Weather-webapp with openweathermap.org
 
+This app is designed primarily for mobile use. You can toggle the mobile view in your dev console, when viewed on a computer.
+
 ### Prerequesites:
 yarn version: 1.22.11, node.js version: 16.20.2
 
