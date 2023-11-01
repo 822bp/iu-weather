@@ -15,7 +15,8 @@ function Location(pos) {
 }
 
 function SunStatus({data: weather}) {
-  const sunPercent = () => weather && parseInt((weather.dt - weather.sys.sunrise) / (weather.sys.sunset - weather.sys.sunrise) * 100)
+  const sunPercent = () => weather && weather.dt < weather.sys.sunset ? parseInt((weather.dt - weather.sys.sunrise) / (weather.sys.sunset - weather.sys.sunrise) * 100) :
+  parseInt((weather.sys.sunrise + 86400 - weather.dt) / (weather.sys.sunset + 86400 - weather.sys.sunrise) * -100);
   const getSunsetColor = () => (sunPercent() > 0) ? ("yellow") : ("darkblue");
   return (
     <div className='section' style={{backgroundColor: weather && getSunsetColor()}}>
