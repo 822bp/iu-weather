@@ -8,12 +8,18 @@
     box-shadow: 0px 0px 10px black;
     font-family: 'Libre Franklin', sans-serif;
 }
-.location {
+.text_tp_1 {
     margin-top: 5vh;
     font-size: large;
     text-align: center;
+    align-items:center;
 }
 .temperature {
-    font-size: xx-large;
+    margin-top: 2vh;
+    font-size: 6vh;
     text-align: center;
+}
+.weather-icon {
+    height: 3vh;
+    width: 3vh;
 }
