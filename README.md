@@ -9,8 +9,8 @@ This Project uses "yarn" as its package manager. Install yarn and use the comman
 Use `yarn start` to start the weather app.
 
 ### Setting the API Key:
-Create a file called `.env.local` and add this line:
+Create a file called `.env.local` on the root of this project and add this line:
 ```
 REACT_APP_OW_API_KEY = "[REPLACE THIS WITH THE API KEY]"
 ```
-Don't forget to replace the placeholder with the Api key.
+**Don't forget to replace "[REPLACE THIS WITH THE API KEY]" with the Api key.**
